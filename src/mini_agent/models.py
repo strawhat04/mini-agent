@@ -1,0 +1,53 @@
+
+from collections.abc import Callable
+from dataclasses import dataclass
+from typing import Any
+
+
+@dataclass
+class ToolSpec:
+    """Information about a tool that can be shown to the model."""
+    name: str
+    description: str
+    input_schema: dict[str, Any]
+
+@dataclass
+class RegisteredTool:
+    spec : ToolSpec
+    implementation : Callable[..., Any]
+
+@dataclass
+class ToolCall:
+    """A request from the model to execute a tool."""
+    name: str
+    args: dict[str, Any]
+
+@dataclass
+class ToolSuccess:
+    """A successfully executed tool call."""
+    tool_name: str
+    result: Any
+
+
+@dataclass
+class ToolFailure:
+    """A tool call that failed during execution."""
+    tool_name: str
+    error_message: str
+
+
+ToolResult = ToolSuccess | ToolFailure
+
+@dataclass
+class FinalResponse:
+    """The model has finished and produced a user-facing answer."""
+    response: str
+
+
+@dataclass
+class ToolCallResponse:
+    """The model is requesting a tool execution."""
+    tool_call: ToolCall
+
+
+ModelResponse = FinalResponse | ToolCallResponse

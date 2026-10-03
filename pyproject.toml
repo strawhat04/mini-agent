@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling >=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mini-agent"
+version = "0.1.0"
+requires-python = ">=3.14"
+authors = [
+    {name='Nabeel', email = 'nabeelk04@gmail.com'}
+]
+description = 'Toy project to understand how codings agents works behind LLM'
+readme = 'README.md'
+dependencies =[
+    "loguru>=0.7.3",
+    "pydantic>=2.13.5",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "pytest>=9.1.1",
+]
+
+[project.scripts]
+
+[tool.ruff.lint]
+ignore = ["I"]
+
+[tool.hatch.build.targets.wheel]
+packages =["src/mini_agent"]
+
+
