@@ -2,7 +2,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
-
+from pydantic import BaseModel
 
 @dataclass
 class ToolSpec:
@@ -37,17 +37,3 @@ class ToolFailure:
 
 
 ToolResult = ToolSuccess | ToolFailure
-
-@dataclass
-class FinalResponse:
-    """The model has finished and produced a user-facing answer."""
-    response: str
-
-
-@dataclass
-class ToolCallResponse:
-    """The model is requesting a tool execution."""
-    tool_call: ToolCall
-
-
-ModelResponse = FinalResponse | ToolCallResponse
