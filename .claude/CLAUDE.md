@@ -79,6 +79,8 @@ When introducing an important concept:
 
 Explain unfamiliar concepts without oversimplifying their mechanics.
 
+Every concept explanation includes a runnable example, executed before it is shown, with its real output. Include at least one edge case: an empty value, an out-of-range value, a wrong type, or precedence between sources. Never show output that was not observed.
+
 Ask challenging questions when they reveal important trade-offs. Let me reason before revealing the answer when appropriate.
 
 Avoid repeating concepts I already understand.

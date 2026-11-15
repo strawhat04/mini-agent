@@ -12,8 +12,10 @@ authors = [
 description = 'Toy project to understand how codings agents works behind LLM'
 readme = 'README.md'
 dependencies =[
+    "httpx>=0.28.1",
     "loguru>=0.7.3",
     "pydantic>=2.13.5",
+    "pydantic-settings>=2.16.1",
 ]
 
 [dependency-groups]

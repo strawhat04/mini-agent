@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 .venv/
-ruff_check/
+.ruff_check/
 .env
 .docs/

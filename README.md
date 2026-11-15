@@ -77,11 +77,6 @@ uv sync
 
 There is no runnable entry point yet. It arrives in stage 7.
 
-## Learning path
-
-- Step-by-step phases for Task 1: [`.docs/task1/00-overview.md`](.docs/task1/00-overview.md)
-- Full spec: [`.docs/Implementation_task_1.md`](.docs/Implementation_task_1.md)
-
 ## Known limitations
 
 - Local use only. No authentication, TLS or rate limiting.
