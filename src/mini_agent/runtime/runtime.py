@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from mini_agent.models import ToolSpec, ToolCall, ToolFailure, ToolSuccess, ToolResult, RegisteredTool
+from mini_agent.domain.tools import ToolCall, ToolFailure, ToolSuccess, ToolResult, RegisteredTool
 from loguru import logger
 
 @dataclass

@@ -1,7 +1,7 @@
 from typing import Literal
-from mini_agent.models import ToolSpec, RegisteredTool
+from mini_agent.domain.tools import ToolSpec, RegisteredTool
 
-def calculate(a: float, b: float, expr : Literal['add', 'sub', 'mulitply', 'divide']) -> float:
+def calculate(a: float, b: float, expr : Literal['add', 'sub', 'multiply', 'divide']) -> float:
     if not isinstance(a, (int, float)) :
         raise TypeError(f"Expect arg a to be numeric but received {type(a)}")
     if not isinstance(b, (int, float)) :
@@ -16,7 +16,7 @@ def calculate(a: float, b: float, expr : Literal['add', 'sub', 'mulitply', 'divi
     elif expr == 'divide':
         return float(a/b)
     else:
-        raise TypeError(f"Invalidate expr type : expected ['add', 'sub', 'mulitply', 'divide'] but received {expr}")
+        raise TypeError(f"Invalidate expr type : expected ['add', 'sub', 'multiply', 'divide'] but received {expr}")
 
 
 calculator_spec = ToolSpec(
