@@ -16,12 +16,14 @@ The model only proposes a decision. Everything else (validation, permissions, ex
 
 | Check | Status |
 |---|---|
-| Tool specs and registered tools | In progress |
-| Runtime validates tool calls before execution | In progress |
-| Policy enforcement | Stub |
-| Agent loop with a fake model | In progress |
+| Typed data contracts | Done |
+| Tool specs and registered tools | Done |
+| Runtime validates tool calls before execution | Done |
+| Model output protocol (decision parsing) | Done |
+| Ollama model adapter (structured output via JSON schema) | Done |
+| Policy enforcement | Not started (next) |
+| Agent loop | Not started |
 | Context and state kept separate from tools | Not started |
-| Ollama model adapter | Not started |
 | HTTP API (FastAPI) | Not started |
 | Logging and metrics | Not started |
 | Automated tests | Not started |
@@ -30,14 +32,15 @@ The model only proposes a decision. Everything else (validation, permissions, ex
 
 | # | Stage | Status |
 |---|---|---|
-| 1 | Typed data contracts | In progress |
-| 2 | Tool specifications and registration | In progress |
-| 3 | Runtime validation and tool execution | In progress |
-| 4 | Fake model and minimal agent loop | In progress |
-| 5 | Policy enforcement and bounded execution | Not started |
-| 6 | Context growth, result filtering, state | Not started |
-| 7 | Evaluation, observability, reliability, Ollama integration | Not started |
-| 8 | Interoperability and frameworks (only when needed) | Not started |
+| 1 | Typed data contracts | Done |
+| 2 | Tool specifications and registration | Done |
+| 3 | Runtime validation and tool execution | Done |
+| 4 | Model output protocol | Done |
+| 5 | Ollama model adapter | Done |
+| 6 | Policy enforcement and minimal agent loop | Next |
+| 7 | Bounded execution, context and state | Not started |
+| 8 | Evaluation, observability, reliability, HTTP API | Not started |
+| 9 | Interoperability and frameworks (only when needed) | Not started |
 
 ## Concepts you will learn
 
@@ -75,16 +78,13 @@ ollama pull qwen3:4b
 uv sync
 ```
 
-There is no runnable entry point yet. It arrives in stage 7.
-
-## Learning path
-
-- Step-by-step phases for Task 1: [`.docs/task1/00-overview.md`](.docs/task1/00-overview.md)
-- Full spec: [`.docs/Implementation_task_1.md`](.docs/Implementation_task_1.md)
+There is no runnable entry point yet. It arrives in stage 8. Until then, the check scripts in `script/` run the pieces by hand.
 
 ## Known limitations
 
 - Local use only. No authentication, TLS or rate limiting.
 - The calculator is the only tool.
 - A small local model sometimes picks the wrong tool or answers wrongly.
+- Rejected model output can echo the rejected value in its error text. This must be fixed before the HTTP API is exposed.
+- The Ollama client is not yet hardened: `is_ready` can still raise on an unexpected response, and DEBUG logs contain prompts and raw responses.
 - No memory across requests and no streaming.

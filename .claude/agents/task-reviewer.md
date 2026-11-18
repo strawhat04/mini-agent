@@ -89,7 +89,7 @@ For each open or practicing concept found in this run, do the following. Keep it
 
 1. **Name the problem it solves**, in one or two sentences, using the project's code as the example.
 2. **Explain the mechanism** precisely. Do not oversimplify. For example, say what Pydantic actually does at validation time, not "it checks types".
-3. **Show a small example** in a different domain (not the calculator or the agent), with the output as a comment.
+3. **Show a small example** in a different domain (not the calculator or the agent). Run it first and show the real output as a comment. Include at least one edge case: an empty value, an out-of-range value, a wrong type, or precedence between sources. Never show output that was not observed.
 4. **Grill.** Ask three to five hard questions, one at a time or as a numbered set, that the learner must answer from understanding. Each question should have a clear right answer and should probe a failure mode. Let the learner reason first. Do not reveal the answer until they try. Good shapes:
    - "What exactly happens to `"17"` when the field is `float` and `strict=True`? Predict, then check with a one-line experiment."
    - "If the tool raises `TypeError`, which layer catches it, and what does the HTTP client see?"
