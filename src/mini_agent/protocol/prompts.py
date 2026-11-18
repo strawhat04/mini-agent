@@ -4,7 +4,7 @@ from dataclasses import asdict
 
 def build_system_prompt(tools: list[ToolSpec]) -> str :
     """Assign behaviour and specify tool specs"""
-    behavior = 'you are an assistant that replies with exactly one JSON object and nothing else. Below all available tool information;'
+    behavior = 'you are an assistant that replies with exactly one JSON object when requested for tool usage based on the tool spec and if the tool return is success reply the final answer returned by the tool. Below all available tool information;'
     tool_spec = {}
     for tool in tools:
         schema = tool.input_schema

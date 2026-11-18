@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from dataclasses import dataclass, field
 from typing import Any
+from mini_agent.domain.messages import Message
 
 class OllamaMessage(BaseModel):
     role : str
@@ -13,10 +14,6 @@ class OllamaChatResponse(BaseModel):
     done_reason : str | None = None
     eval_count : int | None = None
 
-@dataclass
-class PayloadMessage:
-    role : str 
-    content : str
 
 @dataclass
 class PayloadOptions:
@@ -26,7 +23,7 @@ class PayloadOptions:
 @dataclass
 class Payload:
     model : str 
-    messages : list[PayloadMessage]
+    messages : list[Message]
     format : dict[str, Any]
     options : PayloadOptions = field(default_factory=PayloadOptions)
     stream : bool = False

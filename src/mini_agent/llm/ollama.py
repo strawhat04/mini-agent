@@ -9,7 +9,7 @@ from mini_agent.protocol.decision import parse_decision
 from mini_agent.domain.tools import ToolCall
 from mini_agent.domain.messages import FinalResponse 
 from mini_agent.settings import Settings
-from mini_agent.domain.ollama_schema import Payload, PayloadOptions, PayloadMessage, OllamaChatResponse, OllamaMessage
+from mini_agent.domain.ollama_schema import Payload, PayloadOptions, Message, OllamaChatResponse
 from mini_agent.errors import ModelUnavailableError, ModelTimeoutError,ModelResponseError, ModelProtocolError
 from mini_agent.protocol.decision import decision_json_schema
 
@@ -18,7 +18,7 @@ class OllamaLLM:
     client : AsyncClient
     settings : Settings
 
-    async def generate(self, messages : list[PayloadMessage]) -> ToolCall | FinalResponse:
+    async def generate(self, messages : list[Message]) -> ToolCall | FinalResponse:
 
         payload = self._build_payload(model=self.settings.ollama_model, messages=messages)
         logger.debug(f'Received payload : {payload}')
@@ -76,7 +76,7 @@ class OllamaLLM:
         contain_model = any(m.get("name") == self.settings.ollama_model for m in models)
         return status_code==200 and contain_model
     
-    def _build_payload(self, model : str, messages : list[PayloadMessage])  -> dict[str, Any] :
+    def _build_payload(self, model : str, messages : list[Message])  -> dict[str, Any] :
 
         payload_options = PayloadOptions(
             num_predict=self.settings.ollama_num_predict,

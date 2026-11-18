@@ -3,17 +3,17 @@ from httpx import AsyncClient, Timeout
 
 from mini_agent.llm.ollama import OllamaLLM
 from mini_agent.settings import Settings
-from mini_agent.domain.ollama_schema import PayloadMessage
+from mini_agent.domain.messages import Message
 from mini_agent.protocol.prompts import build_system_prompt
 from mini_agent.tools.calculator import calculator
 
 GOOD_MSG = [
-    PayloadMessage(role="system", content=build_system_prompt([calculator.spec])),
-    PayloadMessage(role='user', content="What is 17 multiplied by 23?")
+    Message(role="system", content=build_system_prompt([calculator.spec])),
+    Message(role='user', content="What is 17 multiplied by 23?")
 ]
 
 BAD_MSG =[
-    PayloadMessage(role='user', content="YO WASSUP")
+    Message(role='user', content="YO WASSUP")
 ]
 
 async def main():
