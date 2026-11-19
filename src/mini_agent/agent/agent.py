@@ -2,7 +2,7 @@ import json
 from dataclasses import asdict
 
 from mini_agent.llm.ollama import OllamaLLM
-from mini_agent.domain.tools import  ToolCall, ToolFailure, RegisteredTool
+from mini_agent.domain.tools import  ToolCall, ToolFailure, ToolSuccess, RegisteredTool
 from mini_agent.domain.policy import Policy
 from mini_agent.runtime.runtime import Runtime
 from mini_agent.domain.messages import  Message
@@ -29,11 +29,12 @@ class MiniAgent:
 
         seen : set[tuple[str,str]] = set()
         tool_failures=0
-        tool_calls_cnt = 0 
+        tool_calls_cnt = 0
+        force_final = False
 
         for i in range(self.max_iterations):
             try:
-                decision = await self.llm.generate(messages=messages)
+                decision = await self.llm.generate(messages=messages, final_only=force_final)
             except ModelProtocolError:
                 return AgentResult(
                     termination=TerminationReason.model_protocol_error,
@@ -73,6 +74,7 @@ class MiniAgent:
                     tool_calls_cnt += 1
                     if isinstance(tool_result, ToolFailure):
                         tool_failures+=1
+                    force_final = isinstance(tool_result, ToolSuccess)
                     observation = render_tool_result(tool, tool_result)
 
                 messages.append(

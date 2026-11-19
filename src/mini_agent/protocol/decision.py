@@ -34,3 +34,6 @@ def parse_decision(text: str) -> ToolCall | FinalResponse:
 
 def decision_json_schema() -> dict[str, Any]:
     return _decision_adapter.json_schema()
+
+def final_json_schema() -> dict[str, Any]:
+    return FinalDecision.model_json_schema()
